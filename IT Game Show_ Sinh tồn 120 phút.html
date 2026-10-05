@@ -1,0 +1,2980 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>IT Game Show: Sinh Tồn 120 Phút | Nhập Môn CNTT K26</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;700;800&family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090D16;
+      --bg-card: #131A2A;
+      --bg-card-hover: #1E273D;
+      --border-color: rgba(255, 255, 255, 0.12);
+      --border-glow: rgba(0, 240, 255, 0.4);
+
+      --cyan: #00F0FF;
+      --purple: #9D4EDD;
+      --pink: #FF2E93;
+      --gold: #FFD166;
+      --green: #06D6A0;
+      --red: #EF476F;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+
+      --font-heading: 'Bricolage Grotesque', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-code: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(circle at 15% 15%, rgba(0, 240, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(157, 78, 221, 0.08) 0%, transparent 40%);
+    }
+
+    /* Header & Controls */
+    header {
+      background: rgba(19, 26, 42, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 24px;
+    }
+
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+    }
+
+    .brand-title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #FFF, var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+    }
+
+    .brand-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Top Actions & Global Timer */
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .timer-box {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 6px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .timer-display {
+      font-family: var(--font-code);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold);
+      min-width: 80px;
+      text-align: center;
+    }
+
+    .btn-icon {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-icon:hover {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: var(--cyan);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cyan), #0099ff);
+      color: #000;
+      font-weight: 700;
+      border: none;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #33f3ff, #1aa3ff);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.5);
+      color: #000;
+    }
+
+    .btn-danger {
+      background: rgba(239, 71, 111, 0.2);
+      border-color: var(--red);
+      color: #ff85a1;
+    }
+
+    .btn-danger:hover {
+      background: var(--red);
+      color: #fff;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), #f39c12);
+      color: #000;
+      font-weight: 700;
+      border: none;
+    }
+
+    .btn-gold:hover {
+      filter: brightness(1.1);
+      color: #000;
+    }
+
+    /* Nav Tabs */
+    nav.main-tabs {
+      max-width: 1400px;
+      margin: 16px auto 0;
+      padding: 0 24px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    nav.main-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 10px 20px;
+      border-radius: 12px 12px 0 0;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .tab-btn.active {
+      background: var(--bg-card);
+      color: var(--cyan);
+      border-color: var(--cyan) var(--cyan) transparent var(--cyan);
+      box-shadow: 0 -4px 12px rgba(0, 240, 255, 0.15);
+    }
+
+    /* Main Content Area */
+    main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Glass Card */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+    }
+
+    .card-title span.tag {
+      font-size: 0.75rem;
+      background: rgba(0, 240, 255, 0.15);
+      color: var(--cyan);
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+    }
+
+    /* Leaderboard Grid */
+    .teams-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .team-card {
+      background: linear-gradient(145deg, rgba(22, 27, 46, 0.9), rgba(15, 20, 35, 0.95));
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 18px;
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .team-card:hover {
+      border-color: var(--border-glow);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 240, 255, 0.1);
+    }
+
+    .team-card.rank-1 {
+      border-color: var(--gold);
+      background: linear-gradient(145deg, rgba(35, 30, 15, 0.95), rgba(20, 18, 10, 0.95));
+      box-shadow: 0 0 25px rgba(255, 209, 102, 0.25);
+    }
+
+    .team-card.rank-2 {
+      border-color: #C0C0C0;
+    }
+
+    .team-card.rank-3 {
+      border-color: #CD7F32;
+    }
+
+    .team-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .team-rank-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .rank-1 .team-rank-badge {
+      background: var(--gold);
+      color: #000;
+    }
+
+    .rank-2 .team-rank-badge {
+      background: #E2E8F0;
+      color: #000;
+    }
+
+    .rank-3 .team-rank-badge {
+      background: #E9D5C3;
+      color: #000;
+    }
+
+    .team-name-input {
+      background: transparent;
+      border: none;
+      border-bottom: 2px dashed rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      width: 100%;
+      padding: 4px 6px;
+      transition: border-color 0.2s;
+    }
+
+    .team-name-input:focus {
+      outline: none;
+      border-bottom-color: var(--cyan);
+    }
+
+    .team-score-display {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--cyan);
+      text-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+      line-height: 1;
+      text-align: right;
+      min-width: 70px;
+    }
+
+    .rank-1 .team-score-display {
+      color: var(--gold);
+      text-shadow: 0 0 15px rgba(255, 209, 102, 0.5);
+    }
+
+    .score-buttons {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+    }
+
+    .btn-score {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 6px 0;
+      border-radius: 8px;
+      font-family: var(--font-code);
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: center;
+    }
+
+    .btn-score:hover {
+      background: var(--cyan);
+      color: #000;
+      border-color: var(--cyan);
+      transform: scale(1.05);
+    }
+
+    .btn-score.minus:hover {
+      background: var(--red);
+      color: #fff;
+      border-color: var(--red);
+    }
+
+    .special-cards-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .badge-card {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .badge-card.used {
+      background: rgba(239, 71, 111, 0.2);
+      border-color: var(--red);
+      color: #ff85a1;
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+    /* Sound Board Quick Row */
+    .sound-board {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 24px;
+    }
+
+    .sound-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sound-btn:hover {
+      background: var(--purple);
+      border-color: var(--purple);
+      color: #fff;
+    }
+
+    /* Stage / Round Views */
+    .stage-navigator {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+
+    .stage-step {
+      flex: 1;
+      min-width: 140px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+    }
+
+    .stage-step:hover {
+      border-color: var(--cyan);
+      background: var(--bg-card-hover);
+    }
+
+    .stage-step.active {
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(157, 78, 221, 0.15));
+      border-color: var(--cyan);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+    }
+
+    .stage-step .num {
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--cyan);
+      text-transform: uppercase;
+    }
+
+    .stage-step .title {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Stage 1 Question Grid Cards */
+    .stage1-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .q-grid-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 18px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+    }
+
+    .q-grid-card:hover {
+      background: rgba(0, 240, 255, 0.06);
+      border-color: var(--cyan);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 240, 255, 0.15);
+    }
+
+    .q-grid-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-code);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .q-tag-type {
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .q-tag-choice {
+      background: rgba(0, 240, 255, 0.2);
+      color: var(--cyan);
+      border: 1px solid var(--cyan);
+    }
+
+    .q-tag-fill {
+      background: rgba(255, 209, 102, 0.2);
+      color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+
+    /* Presentation Modal for Stage 1 Quiz */
+    .modal-quiz-stage {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 8, 15, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 1500;
+      padding: 24px;
+      overflow-y: auto;
+    }
+
+    .modal-quiz-stage.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .presentation-box {
+      background: var(--bg-card);
+      border: 2px solid var(--cyan);
+      border-radius: 24px;
+      max-width: 1050px;
+      width: 100%;
+      padding: 32px;
+      box-shadow: 0 0 50px rgba(0, 240, 255, 0.25);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+    }
+
+    .pres-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .pres-title {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--cyan);
+    }
+
+    .pres-question-text {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.4;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 20px;
+      border-radius: 16px;
+      border-left: 5px solid var(--cyan);
+    }
+
+    .pres-options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .pres-option-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1.5px solid var(--border-color);
+      border-radius: 14px;
+      padding: 16px 20px;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #fff;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .pres-option-key {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(0, 240, 255, 0.15);
+      color: var(--cyan);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-code);
+      font-weight: 800;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .pres-fill-guide {
+      background: rgba(255, 209, 102, 0.08);
+      border: 2px dashed var(--gold);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      color: var(--gold);
+    }
+
+    .pres-fill-guide h3 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+    }
+
+    .char-slot {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 36px;
+      border-bottom: 3px solid var(--cyan);
+      background: rgba(0, 240, 255, 0.12);
+      margin: 0 3px;
+      border-radius: 4px;
+      font-family: var(--font-code);
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--cyan);
+      box-shadow: 0 2px 8px rgba(0, 240, 255, 0.2);
+    }
+
+    .pres-answer-box {
+      display: none;
+      background: rgba(6, 214, 160, 0.12);
+      border: 2px solid var(--green);
+      border-radius: 16px;
+      padding: 20px;
+      color: #d1fae5;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .pres-answer-box.active {
+      display: block;
+    }
+
+    .pres-answer-title {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--green);
+      margin-bottom: 6px;
+    }
+
+    /* Modal Scoring Strip */
+    .pres-scoring-strip {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .pres-scoring-teams {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 8px;
+    }
+
+    .pres-team-btn-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 6px;
+      text-align: center;
+    }
+
+    .pres-team-btn-box .name {
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--text-muted);
+    }
+
+    .pres-team-btn-box .score {
+      font-family: var(--font-code);
+      font-weight: 800;
+      color: var(--cyan);
+      font-size: 1rem;
+    }
+
+    .pres-team-btn-box .btn-mini {
+      background: var(--cyan);
+      color: #000;
+      border: none;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 800;
+      font-size: 0.75rem;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+
+    /* Accordion & Interactive Quiz Cards */
+    .quiz-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    .quiz-card:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .quiz-header {
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      gap: 16px;
+      user-select: none;
+    }
+
+    .quiz-q {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .quiz-num {
+      background: var(--cyan);
+      color: #000;
+      font-family: var(--font-code);
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .quiz-answer {
+      display: none;
+      padding: 16px 20px;
+      background: rgba(0, 240, 255, 0.05);
+      border-top: 1px dashed var(--border-color);
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    .quiz-card.open .quiz-answer {
+      display: block;
+    }
+
+    .quiz-card.open {
+      border-color: var(--cyan);
+    }
+
+    /* Evidence File Inspector (Round 2) */
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .evidence-card {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--red);
+      border-radius: 12px;
+      padding: 16px;
+      position: relative;
+    }
+
+    .evidence-card .tag-error {
+      background: var(--red);
+      color: #fff;
+      font-family: var(--font-code);
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    .evidence-card h4 {
+      font-family: var(--font-code);
+      color: var(--gold);
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      word-break: break-all;
+    }
+
+    .solution-box {
+      background: rgba(6, 214, 160, 0.1);
+      border-left: 3px solid var(--green);
+      padding: 8px 12px;
+      margin-top: 10px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.9rem;
+      color: #d1fae5;
+      display: none;
+    }
+
+    .evidence-card.revealed .solution-box {
+      display: block;
+    }
+
+    /* Role Flipper Cards (Round 4c) */
+    .role-cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .role-flipper {
+      height: 180px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .role-flipper-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .role-flipper.flipped .role-flipper-inner {
+      transform: rotateY(180deg);
+    }
+
+    .role-front,
+    .role-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .role-front {
+      background: linear-gradient(135deg, var(--bg-card-hover), #0f172a);
+      border: 2px dashed var(--purple);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .role-front .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+    }
+
+    .role-back {
+      background: linear-gradient(135deg, var(--purple), #4c1d95);
+      color: #fff;
+      transform: rotateY(180deg);
+      border: 2px solid var(--gold);
+      box-shadow: 0 0 25px rgba(157, 78, 221, 0.5);
+    }
+
+    .role-back h3 {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      margin-bottom: 6px;
+    }
+
+    .role-back p {
+      font-size: 0.8rem;
+      opacity: 0.9;
+    }
+
+    /* Wheel Spinner Canvas */
+    .wheel-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding: 20px 0;
+    }
+
+    #wheelCanvas {
+      max-width: 100%;
+      border-radius: 50%;
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.3), 0 0 60px rgba(157, 78, 221, 0.2);
+    }
+
+    .wheel-pointer {
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 35px solid var(--pink);
+      margin-bottom: -25px;
+      z-index: 10;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      place-items: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: grid;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .modal-box {
+      background: var(--bg-card);
+      border: 2px solid var(--gold);
+      border-radius: 24px;
+      max-width: 600px;
+      width: 100%;
+      padding: 32px;
+      text-align: center;
+      box-shadow: 0 0 50px rgba(255, 209, 102, 0.3);
+      position: relative;
+    }
+
+    .modal-box h2 {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    /* Confetti Canvas Overlay */
+    #confettiCanvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2500;
+    }
+
+    pre,
+    code {
+      font-family: var(--font-code);
+      background: rgba(0, 0, 0, 0.4);
+      color: var(--cyan);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 12px 16px;
+      }
+
+      .brand-title {
+        font-size: 1.2rem;
+      }
+
+      .timer-display {
+        font-size: 1.1rem;
+      }
+
+      .score-buttons {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .stage-step {
+        min-width: 110px;
+        padding: 8px 10px;
+      }
+
+      .pres-options-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pres-question-text {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Top Navigation & Controls Header -->
+  <header>
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-icon">⚡</div>
+        <div>
+          <div class="brand-title">IT GAME SHOW</div>
+          <div class="brand-subtitle">Sinh Tồn 120 Phút • Nhập Môn CNTT K26</div>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <!-- 120m Global Countdown Timer -->
+        <div class="timer-box" title="Đồng hồ đếm ngược buổi học 120 phút">
+          <span>⏱️</span>
+          <div class="timer-display" id="globalTimer">120:00</div>
+          <button class="btn-icon" id="btnStartTimer" onclick="toggleGlobalTimer()">▶️</button>
+          <button class="btn-icon" onclick="resetGlobalTimer()">🔄</button>
+        </div>
+
+        <button class="btn-icon btn-gold" onclick="openWinnerModal()">🏆 Trao Giải</button>
+        <button class="btn-icon" id="btnMute" onclick="toggleMute()">🔊 Bật Âm</button>
+        <button class="btn-icon" onclick="toggleFullscreen()">🔲 Toàn Màn Hình</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="main-tabs">
+    <button class="tab-btn active" onclick="switchTab('tab-scoreboard', this)">🏆 Bảng Điểm Live</button>
+    <button class="tab-btn" onclick="switchTab('tab-stages', this)">🎮 5 Vòng Chơi</button>
+    <button class="tab-btn" onclick="switchTab('tab-wheel', this)">🎡 Vòng Quay Chọn Đội</button>
+    <button class="tab-btn" onclick="switchTab('tab-rules', this)">📜 Luật Chơi & Lịch Trình</button>
+  </nav>
+
+  <main>
+
+    <!-- QUICK SOUND EFFECTS BOARD -->
+    <div class="sound-board">
+      <span style="font-weight: 700; color: var(--cyan); font-size: 0.85rem; text-transform: uppercase;">Sound
+        FX:</span>
+      <button class="sound-btn" onclick="sfx.playCorrect()">🔔 Đúng Rồi (+Pts)</button>
+      <button class="sound-btn" onclick="sfx.playWrong()">❌ Sai Rồi</button>
+      <button class="sound-btn" onclick="sfx.playDrumroll()">🥁 Hồi Hộp</button>
+      <button class="sound-btn" onclick="sfx.playFanfare()">🎺 Chiến Thắng</button>
+      <button class="sound-btn" onclick="sfx.playBeep()">⏰ Hết Giờ</button>
+    </div>
+
+    <!-- TAB 1: LIVE SCOREBOARD -->
+    <div id="tab-scoreboard" class="tab-content active">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <span>🏆 Bảng Điểm Thi Đấu Trực Tiếp</span>
+            <span class="tag" id="teamCountTag">6 Đội Thi</span>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn-icon btn-primary" onclick="addTeam()">➕ Thêm Đội</button>
+            <button class="btn-icon" onclick="sortTeams()">📊 Xếp Theo Điểm</button>
+            <button class="btn-icon btn-danger" onclick="resetScores()">🔄 Reset Điểm</button>
+          </div>
+        </div>
+
+        <div class="teams-grid" id="teamsContainer">
+          <!-- Team cards injected via JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: 5 STAGES & QUESTIONS -->
+    <div id="tab-stages" class="tab-content">
+
+      <!-- Stage Selector Buttons -->
+      <div class="stage-navigator">
+        <div class="stage-step active" onclick="switchStage(0, this)">
+          <div class="num">Vòng 0 • 10m</div>
+          <div class="title">🔥 Khởi Động</div>
+        </div>
+        <div class="stage-step" onclick="switchStage(1, this)">
+          <div class="num">Vòng 1 • 20m</div>
+          <div class="title">🎯 Đấu Trường Trên Bảng</div>
+        </div>
+        <div class="stage-step" onclick="switchStage(2, this)">
+          <div class="num">Vòng 2 • 20m</div>
+          <div class="title">🕵️ Phá Án 23:59</div>
+        </div>
+        <div class="stage-step" onclick="switchStage(3, this)">
+          <div class="num">Vòng 3 • 20m</div>
+          <div class="title">🧮 Tính Toán</div>
+        </div>
+        <div class="stage-step" onclick="switchStage(4, this)">
+          <div class="num">Vòng 4 • 20m</div>
+          <div class="title">🎭 Vai & Ngành</div>
+        </div>
+        <div class="stage-step" onclick="switchStage(5, this)">
+          <div class="num">Vòng 5 • 15m</div>
+          <div class="title">⚡ Tứ Hùng</div>
+        </div>
+      </div>
+
+      <!-- STAGE 0: WARM UP -->
+      <div id="stage-0" class="stage-content">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">🔥 Vòng Khởi Động: Hai Sự Thật, Một Lời Nói Dối <span class="tag">10 Phút • Tối đa
+                +4đ</span></div>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h4 style="color: var(--cyan); margin-bottom: 6px;">📋 Luật chơi:</h4>
+            <ol style="margin-left: 20px; color: var(--text-muted);">
+              <li>Mỗi đội có 10 phút nghĩ 3 phát biểu về môn học: <b>2 câu ĐÚNG</b>, <b>1 câu SAI</b>.</li>
+              <li>Lần lượt từng đội đọc 3 câu. Các đội khác có 30 giây thảo luận và giơ bảng chọn câu sai.</li>
+              <li>Đoán đúng câu sai: <span class="btn-score" style="display:inline-block; padding: 2px 8px;">+1đ</span>.
+                Đội ra đề lừa được ít nhất 1 đội: <span class="btn-score"
+                  style="display:inline-block; padding: 2px 8px;">+2đ</span>.</li>
+            </ol>
+          </div>
+
+          <div
+            style="background: rgba(0, 240, 255, 0.05); border: 1px solid var(--border-glow); padding: 16px; border-radius: 12px;">
+            <h4 style="color: var(--gold); margin-bottom: 6px;">💡 Ví dụ gợi ý cho Giảng viên:</h4>
+            <p style="font-size: 0.95rem;">
+              1. Linux là hệ điều hành nguồn mở miễn phí.<br>
+              2. Trên 90% server thế giới chạy Linux.<br>
+              3. Muốn làm ứng dụng iOS bắt buộc phải dùng Linux. ❌ <i>(Sai! Phải dùng macOS)</i>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 1: WHITEBOARD SPEED QUIZ -->
+      <div id="stage-1" class="stage-content" style="display: none;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">🎯 Vòng 1: Đấu Trường Tốc Độ Viết Bảng <span class="tag" id="stage1CountTag">30 Câu Hỏi Ngẫu Nhiên</span></div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button class="btn-icon btn-gold" style="font-size:0.95rem; padding:8px 16px;" onclick="shuffleStage1Questions()">🎲 XÁO TRỘN RANDOM CÂU HỎI</button>
+              <button class="btn-icon btn-primary" style="font-size:1.05rem; padding:10px 24px;" onclick="startStage1RandomGame()">🚀 BẮT ĐẦU VÒNG 1 (RANDOM)</button>
+            </div>
+          </div>
+
+          <!-- Rules Box for Round 1 -->
+          <div
+            style="background: rgba(0, 240, 255, 0.06); border: 1.5px solid var(--cyan); border-radius: 14px; padding: 18px; margin-bottom: 20px;">
+            <h4 style="color: var(--cyan); font-family: var(--font-heading); font-size: 1.15rem; margin-bottom: 8px;">📌
+              LUẬT CHƠI VÒNG 1 (THI TRỰC TIẾP TRÊN BẢNG LỚP):</h4>
+            <ul style="margin-left: 20px; color: var(--text-main); font-size: 0.95rem;">
+              <li>Mỗi đội cử <b>1 đại diện (Tổng 7 đại diện từ 7 nhóm)</b> mang phấn/bút lên đứng trước khu vực bảng của nhóm mình.</li>
+              <li>Bấm nút **🚀 BẮT ĐẦU VÒNG 1 (RANDOM)** để xáo trộn ngẫu nhiên thứ tự câu hỏi và chiếu Đề bài Pop-up lên màn hình.</li>
+              <li><b>Dạng Trắc Nghiệm (A, B, C, D):</b> 7 bạn ghi chữ cái phương án chọn (A, B, C hoặc D) thật to lên bảng.</li>
+              <li><b>Dạng Điền Đáp Án (`[1]`, `[2]`):</b> Quan sát số vị trí trên đề bài và số ô gạch <code style="color:var(--cyan);">_ _ _ _ _</code> để ghi lên bảng: <code style="color:var(--gold);">1: [từ 1]</code> và <code style="color:var(--gold);">2: [từ 2]</code>.</li>
+              <li>Giảng viên bấm **"📢 HIỆN ĐÁP ÁN"** để công bố kết quả và cộng điểm trực tiếp cho các đội ngay trên màn hình Pop-up!</li>
+            </ul>
+          </div>
+
+          <div style="font-weight:700; color:var(--text-muted); font-size:0.9rem; margin-bottom:10px;">DANH SÁCH 30 CÂU HỎI (CLICK CÂU BẤT KỲ ĐỂ CHIẾU LÊN MÀN HÌNH MÁY CHIẾU):</div>
+          <div class="stage1-grid" id="stage1Grid">
+            <!-- Grid cards injected via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 2: DETECTIVE CASE -->
+      <div id="stage-2" class="stage-content" style="display: none;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">🕵️ Vòng 2: Phá Án "Vụ Mất Bài Tập Lúc 23:59" <span class="tag">20 Phút • Tối đa +16đ</span></div>
+            <button class="btn-icon btn-primary" onclick="startStageTimer(180)">⏱️ Khởi Động Đếm 3 Phút</button>
+          </div>
+
+          <!-- Rules Box for Round 2 -->
+          <div style="background: rgba(157, 78, 221, 0.08); border: 1.5px solid var(--purple); border-radius: 14px; padding: 18px; margin-bottom: 20px;">
+            <h4 style="color: var(--gold); font-family: var(--font-heading); font-size: 1.15rem; margin-bottom: 8px;">📌 LUẬT CHƠI VÒNG 2 (TÌM LỖI & SỬA LỖI TRÊN BẢNG PHỤ / GIẤY):</h4>
+            <ul style="margin-left: 20px; color: var(--text-main); font-size: 0.95rem; line-height: 1.6;">
+              <li><b>Bối cảnh:</b> Bạn Bình nộp bài lúc 23:59 nhưng file bị mất sạch và lỗi hỏng liên kết! 8 hồ sơ bằng chứng bên dưới chứa 8 sai lầm nghiêm trọng của sinh viên CNTT.</li>
+              <li><b>Cách thức thi:</b> Giảng viên chiếu 8 Bằng chứng lên màn hình. Tất cả các nhóm có <b>3 phút suy nghĩ & thảo luận</b> để soi tìm Lỗi sai ("Tội") và Nêu cách sửa chuẩn.</li>
+              <li><b>Trình bày:</b> Đại diện 7 nhóm ghi kết quả lên bảng phụ hoặc giấy theo mẫu: <code style="color:var(--cyan);">[BC #1]: Lỗi: ... | Sửa: ...</code></li>
+              <li><b>Tính điểm:</b> Giảng viên lần lượt bấm nút <b>"🔍 HIỂN THỊ LỖI & CÁCH SỬA"</b> từng bằng chứng để công bố đáp án. Mỗi Bằng chứng chỉ đúng Lỗi <span style="color:var(--green); font-weight:700;">+1đ</span>, nêu đúng Cách sửa <span style="color:var(--green); font-weight:700;">+1đ</span> (Tối đa +16đ cả vòng).</li>
+            </ul>
+          </div>
+
+          <div class="evidence-grid" id="evidenceGrid">
+            <!-- 8 Evidence Items injected via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 3: ESTIMATION & CALCULATION -->
+      <div id="stage-3" class="stage-content" style="display: none;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">🧮 Vòng 3: Ước Lượng Và Tính Toán Thực Tế <span class="tag">20 Phút • +2đ /
+                Câu</span></div>
+            <button class="btn-icon" onclick="startStageTimer(120)">⏱️ Đếm 2 Phút</button>
+          </div>
+          <p style="color: var(--text-muted); margin-bottom: 16px;">Các đội có 2 phút tính toán & ghi đáp án lên bảng
+            phụ. Đúng hoàn toàn <span style="color: var(--gold);">+2đ</span>, đúng hướng sai số <span
+              style="color: var(--gold);">+1đ</span>.</p>
+
+          <div id="stage3-questions">
+            <!-- Inject Stage 3 Questions -->
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 4: ROLES & MAJORS -->
+      <div id="stage-4" class="stage-content" style="display: none;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">🎭 Vòng 4: Chọn Đúng Vai, Đúng Ngành <span class="tag">20 Phút</span></div>
+          </div>
+
+          <h3 style="color: var(--cyan); margin: 16px 0 8px;">4a. Chọn Ngành Nào? (CS, SE, IT, DS) <span
+              style="font-size:0.85rem; color:var(--text-muted);">(Giơ bảng +1đ/câu)</span></h3>
+          <div id="stage4a-questions"></div>
+
+          <h3 style="color: var(--cyan); margin: 24px 0 8px;">4b. Tầng Nào Trong DIKW Pyramid? <span
+              style="font-size:0.85rem; color:var(--text-muted);">(Data, Info, Knowledge, Wisdom +1đ/câu)</span></h3>
+          <div id="stage4b-questions"></div>
+
+          <h3 style="color: var(--gold); margin: 28px 0 8px;">4c. Thử Thách "Mình Là Ai?" (Roleplay Card Flip)</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Mỗi đội chọn 1 thành viên lên rút 1 thẻ bên dưới
+            (click để lật thẻ). Diễn tả bằng lời/hành động (không nói từ cấm) trong 60s để đội đoán. Đoán đúng <span
+              style="color: var(--green); font-weight:700;">+2đ</span>!</p>
+
+          <div class="role-cards-container">
+            <div class="role-flipper" onclick="this.classList.toggle('flipped'); sfx.playCorrect();">
+              <div class="role-flipper-inner">
+                <div class="role-front">
+                  <div class="card-icon">💻</div>
+                  <div style="font-weight:700;">Thẻ Vai Trò #1</div>
+                  <div style="font-size:0.75rem; color:var(--cyan);">Click để lật</div>
+                </div>
+                <div class="role-back">
+                  <h3>Software Engineer</h3>
+                  <p>Từ cấm: Lập trình, Code, Viết phần mềm</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="role-flipper" onclick="this.classList.toggle('flipped'); sfx.playCorrect();">
+              <div class="role-flipper-inner">
+                <div class="role-front">
+                  <div class="card-icon">📊</div>
+                  <div style="font-weight:700;">Thẻ Vai Trò #2</div>
+                  <div style="font-size:0.75rem; color:var(--cyan);">Click để lật</div>
+                </div>
+                <div class="role-back">
+                  <h3>Data Engineer</h3>
+                  <p>Từ cấm: Dữ liệu, Database, Pipeline</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="role-flipper" onclick="this.classList.toggle('flipped'); sfx.playCorrect();">
+              <div class="role-flipper-inner">
+                <div class="role-front">
+                  <div class="card-icon">🚀</div>
+                  <div style="font-weight:700;">Thẻ Vai Trò #3</div>
+                  <div style="font-size:0.75rem; color:var(--cyan);">Click để lật</div>
+                </div>
+                <div class="role-back">
+                  <h3>DevOps Engineer</h3>
+                  <p>Từ cấm: Server, CI/CD, Triển khai</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="role-flipper" onclick="this.classList.toggle('flipped'); sfx.playCorrect();">
+              <div class="role-flipper-inner">
+                <div class="role-front">
+                  <div class="card-icon">🤖</div>
+                  <div style="font-weight:700;">Thẻ Vai Trò #4</div>
+                  <div style="font-size:0.75rem; color:var(--cyan);">Click để lật</div>
+                </div>
+                <div class="role-back">
+                  <h3>AI Agent Engineer</h3>
+                  <p>Từ cấm: Trí tuệ nhân tạo, LLM, Robot</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="role-flipper" onclick="this.classList.toggle('flipped'); sfx.playCorrect();">
+              <div class="role-flipper-inner">
+                <div class="role-front">
+                  <div class="card-icon">📋</div>
+                  <div style="font-weight:700;">Thẻ Vai Trò #5</div>
+                  <div style="font-size:0.75rem; color:var(--cyan);">Click để lật</div>
+                </div>
+                <div class="role-back">
+                  <h3>Business Analyst (BA)</h3>
+                  <p>Từ cấm: Yêu cầu, Khách hàng, Phân tích</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 5: FINALE -->
+      <div id="stage-5" class="stage-content" style="display: none;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">⚡ Vòng 5: Chung Kết Tứ Hùng <span class="tag">15 Phút • Top 4 Đội • Tối đa
+                +20đ</span></div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px;">
+
+            <div
+              style="background: rgba(0,0,0,0.3); padding: 18px; border-radius: 12px; border: 1px solid var(--border-color);">
+              <h4 style="color: var(--cyan); margin-bottom: 8px;">1. Vẽ sơ đồ IPO (+5đ)</h4>
+              <p style="font-size: 0.9rem; color: var(--text-muted);">
+                Mỗi đội có 2 phút vẽ sơ đồ <code>Input ➔ Process ➔ Output</code> cho một hệ thống thực tế (Shopee, Grab,
+                MoMo, ChatGPT...).
+              </p>
+            </div>
+
+            <div
+              style="background: rgba(0,0,0,0.3); padding: 18px; border-radius: 12px; border: 1px solid var(--border-color);">
+              <h4 style="color: var(--cyan); margin-bottom: 8px;">2. Thao tác siêu tốc 30s (+5đ)</h4>
+              <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px;">
+                Đại diện mỗi đội trực tiếp máy GV thực hiện: Mở Task Manager, Bật hiển thị đuôi file, Copy Relative
+                Path...
+              </p>
+              <button class="btn-icon btn-primary" onclick="startStageTimer(30)">⏱️ Khởi Động Đếm 30s</button>
+            </div>
+
+            <div
+              style="background: rgba(0,0,0,0.3); padding: 18px; border-radius: 12px; border: 1px solid var(--border-color); grid-column: 1 / -1;">
+              <h4 style="color: var(--gold); margin-bottom: 8px;">3. Câu Hỏi Tử Thần: Ẩn Dụ Kỳ Diệu (Tối đa +10đ)</h4>
+              <p style="font-size: 0.95rem; margin-bottom: 12px;">
+                <i>"Hãy giải thích cho ông bà nội hiểu Kernel và Shell là gì bằng một phép ẩn dụ gần gũi nhất."</i><br>
+                Cả lớp vỗ tay bình chọn: Đội được vỗ tay to nhất nhận <b>+10đ</b>, các vị trí sau nhận <b>+6đ</b>,
+                <b>+4đ</b>, <b>+2đ</b>!
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TAB 3: WHEEL OF FORTUNE -->
+    <div id="tab-wheel" class="tab-content">
+      <div class="card" style="text-align: center;">
+        <div class="card-header">
+          <div class="card-title">🎡 Vòng Quay May Mắn Chọn Đội Thi / Trả Lời</div>
+        </div>
+
+        <div class="wheel-container">
+          <div class="wheel-pointer"></div>
+          <canvas id="wheelCanvas" width="420" height="420"></canvas>
+          <button class="btn-icon btn-primary" style="font-size: 1.2rem; padding: 12px 36px;" onclick="spinWheel()">🚀
+            QUAY NGAY!</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: RULES & SCHEDULE -->
+    <div id="tab-rules" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📜 Lịch Trình Chi Tiết 120 Phút & Danh Hiệu</div>
+        </div>
+
+        <div style="overflow-x: auto; margin-bottom: 24px;">
+          <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--cyan); color: var(--cyan);">
+                <th style="padding: 10px;">Thời Gian</th>
+                <th style="padding: 10px;">Hoạt Động / Vòng chơi</th>
+                <th style="padding: 10px;">Nội Dung Kiến Thức</th>
+                <th style="padding: 10px;">Điểm Tối Đa</th>
+              </tr>
+            </thead>
+            <tbody style="color: var(--text-muted); font-size: 0.95rem;">
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 10px; font-family: var(--font-code);">00 - 10 min</td>
+                <td style="padding: 10px; color: #fff;">Khởi động: Lập đội + 2 Sự thật 1 nói dối</td>
+                <td style="padding: 10px;">Tổng hợp Session 01 & 02</td>
+                <td style="padding: 10px; color: var(--gold);">+4đ</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 10px; font-family: var(--font-code);">10 - 30 min</td>
+                <td style="padding: 10px; color: #fff;">Vòng 1: Đấu trường tốc độ viết bảng</td>
+                <td style="padding: 10px;">Kernel, Shell, CLI, Path, DIKW, Units</td>
+                <td style="padding: 10px; color: var(--gold);">+3đ</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 10px; font-family: var(--font-code);">30 - 50 min</td>
+                <td style="padding: 10px; color: #fff;">Vòng 2: Phá án "Mất bài tập 23:59"</td>
+                <td style="padding: 10px;">Naming convention, extensions, paths, backup</td>
+                <td style="padding: 10px; color: var(--gold);">+16đ</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-color); background: rgba(255,255,255,0.02);">
+                <td style="padding: 10px; font-family: var(--font-code);">50 - 60 min</td>
+                <td style="padding: 10px; color: var(--green);">☕ NGHỈ GIẢI LAO (10 PHÚT)</td>
+                <td style="padding: 10px;">Nạp năng lượng</td>
+                <td style="padding: 10px;">-</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 10px; font-family: var(--font-code);">60 - 80 min</td>
+                <td style="padding: 10px; color: #fff;">Vòng 3: Ước lượng và tính toán</td>
+                <td style="padding: 10px;">RAM, SSD vs HDD, Task Manager, Photo storage</td>
+                <td style="padding: 10px; color: var(--gold);">+10đ</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 10px; font-family: var(--font-code);">80 - 100 min</td>
+                <td style="padding: 10px; color: #fff;">Vòng 4: Chọn đúng vai, đúng ngành</td>
+                <td style="padding: 10px;">CS vs SE vs IT vs DS, DIKW, IT Roles</td>
+                <td style="padding: 10px; color: var(--gold);">+10đ</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 10px; font-family: var(--font-code);">100 - 115 min</td>
+                <td style="padding: 10px; color: #fff;">Vòng 5: Chung kết Tứ Hùng</td>
+                <td style="padding: 10px;">IPO Sơ đồ, Thao tác máy, Ẩn dụ Kernel</td>
+                <td style="padding: 10px; color: var(--gold);">+20đ</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px; font-family: var(--font-code);">115 - 120 min</td>
+                <td style="padding: 10px; color: var(--gold);">🏆 Trao Giải & Tổng Kết Môn Học</td>
+                <td style="padding: 10px;">Vinh danh & Thẻ thu hoạch</td>
+                <td style="padding: 10px;">👑</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+          <div
+            style="background: rgba(0, 240, 255, 0.05); border: 1px solid var(--cyan); padding: 16px; border-radius: 12px;">
+            <h4 style="color: var(--cyan); margin-bottom: 6px;">🃏 Thẻ Đặc Biệt (Mỗi Đội)</h4>
+            <ul style="margin-left: 18px; font-size: 0.9rem; color: var(--text-muted);">
+              <li><b>Hỏi Giảng Viên:</b> Nhận 1 gợi ý nhỏ (Trừ <b>-1đ</b>).</li>
+              <li><b>Hỏi Đội Bạn:</b> Chọn 1 đội bạn trợ giúp (Không trừ điểm).</li>
+              <li><b>50 : 50:</b> Giảng viên loại 2 đáp án sai (Miễn phí).</li>
+              <li><b>Phá Hoại:</b> Trả lời 1 câu hỏi khó để trừ <b>-2đ</b> đội đối thủ.</li>
+            </ul>
+          </div>
+
+          <div
+            style="background: rgba(255, 209, 102, 0.05); border: 1px solid var(--gold); padding: 16px; border-radius: 12px;">
+            <h4 style="color: var(--gold); margin-bottom: 6px;">🏅 Danh Hiệu Vinh Danh</h4>
+            <ul style="margin-left: 18px; font-size: 0.9rem; color: var(--text-muted);">
+              <li>🥇 Hạng 1: <b>Chúa Tể Kernel</b> 👑</li>
+              <li>🥈 Hạng 2: <b>Thánh Relative Path</b> 🛣️</li>
+              <li>🥉 Hạng 3: <b>Pháp Sư Task Manager</b> 🧙‍♂️</li>
+              <li>🎖️ Giải Phụ: <b>Thám Tử File System</b> & <b>Bậc Thầy Ẩn Dụ</b></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- STAGE 1 FULL PRESENTATION QUIZ MODAL -->
+  <div class="modal-quiz-stage" id="stage1QuizModal">
+    <div class="presentation-box">
+      <div class="pres-header">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div class="pres-title" id="presIndexTag">CÂU 1 / 15</div>
+          <span class="q-tag-type" id="presTypeTag">TRẮC NGHIỆM</span>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="font-family:var(--font-code); font-size:1.3rem; font-weight:800; color:var(--gold);"
+            id="presTimerDisplay">⏱️ 30s</div>
+          <button class="btn-icon btn-primary" onclick="runPresTimer(30)">⏱️ Đếm 30s</button>
+          <button class="btn-icon" onclick="runPresTimer(15)">⏱️ Đếm 15s</button>
+          <button class="btn-icon btn-danger" onclick="closeStage1QuizModal()">✖ Đóng Modal</button>
+        </div>
+      </div>
+
+      <!-- Question Text -->
+      <div class="pres-question-text" id="presQuestionText">
+        Nội dung câu hỏi ở đây...
+      </div>
+
+      <!-- Question Content (Options OR Blank Fill Guide) -->
+      <div id="presQuestionContent">
+        <!-- Injected via JS -->
+      </div>
+
+      <!-- Reveal Answer Box -->
+      <div class="pres-answer-box" id="presAnswerBox">
+        <div class="pres-answer-title">💡 ĐÁP ÁN ĐÚNG:</div>
+        <div id="presAnswerContent" style="font-size:1.25rem; font-weight:700; color:#fff;"></div>
+        <div id="presExplanationContent" style="font-size:0.95rem; color:var(--text-muted); margin-top:6px;"></div>
+      </div>
+
+      <!-- Embedded Scoring Control for All Teams -->
+      <div class="pres-scoring-strip">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:0.85rem; font-weight:700; color:var(--cyan); text-transform:uppercase;">⚡ CHẤM ĐIỂM
+            NHANH CHO CÁC ĐỘI (TRỰC TIẾP TRÊN MÀN HÌNH):</span>
+          <button class="btn-icon btn-gold" onclick="togglePresAnswer()">📢 HIỆN ĐÁP ÁN</button>
+        </div>
+        <div class="pres-scoring-teams" id="presScoringTeams">
+          <!-- Injected teams score buttons -->
+        </div>
+      </div>
+
+      <!-- Bottom Controls -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+        <button class="btn-icon" onclick="navigatePresQuestion(-1)">⬅️ CÂU TRƯỚC</button>
+        <div style="color:var(--text-muted); font-size:0.9rem;">Dùng phím mũi tên ⬅️ ➡️ trên bàn phím để chuyển câu
+        </div>
+        <button class="btn-icon btn-primary" onclick="navigatePresQuestion(1)">CÂU TIẾP THEO ➡️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WINNER CEREMONY MODAL -->
+  <div class="modal-overlay" id="winnerModal">
+    <div class="modal-box">
+      <h2>🏆 LỄ TRAO GIẢI IT GAME SHOW 🏆</h2>
+      <div id="winnnerDetails" style="margin: 20px 0;"></div>
+      <button class="btn-icon btn-gold" style="font-size: 1.1rem; padding: 10px 28px;" onclick="closeWinnerModal()">Đóng
+        & Tiếp Tục</button>
+    </div>
+  </div>
+
+  <script>
+    /* -------------------------------------------------------------
+     * 1. WEB AUDIO SYNTHESIZER SOUND EFFECTS ENGINE (100% Offline)
+     * ------------------------------------------------------------- */
+    class SoundEngine {
+      constructor() {
+        this.ctx = null;
+        this.muted = false;
+      }
+      init() {
+        if (!this.ctx) {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (AudioCtx) this.ctx = new AudioCtx();
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+      playCorrect() {
+        if (this.muted) return;
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, now);
+        osc.frequency.setValueAtTime(659.25, now + 0.08);
+        osc.frequency.setValueAtTime(783.99, now + 0.16);
+        osc.frequency.setValueAtTime(1046.50, now + 0.24);
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.5);
+      }
+      playWrong() {
+        if (this.muted) return;
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(180, now);
+        osc.frequency.linearRampToValueAtTime(90, now + 0.3);
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.35);
+      }
+      playBeep() {
+        if (this.muted) return;
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(880, now);
+        gain.gain.setValueAtTime(0.15, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.15);
+      }
+      playDrumroll() {
+        if (this.muted) return;
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        for (let i = 0; i < 16; i++) {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(120 + (i % 2) * 30, now + i * 0.06);
+          gain.gain.setValueAtTime(0.15, now + i * 0.06);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.06 + 0.05);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now + i * 0.06);
+          osc.stop(now + i * 0.06 + 0.05);
+        }
+      }
+      playFanfare() {
+        if (this.muted) return;
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        const notes = [523.25, 523.25, 523.25, 659.25, 783.99, 1046.50];
+        const times = [0, 0.12, 0.24, 0.36, 0.48, 0.65];
+        const durations = [0.1, 0.1, 0.1, 0.12, 0.15, 0.6];
+
+        notes.forEach((freq, i) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, now + times[i]);
+          gain.gain.setValueAtTime(0.3, now + times[i]);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + times[i] + durations[i]);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now + times[i]);
+          osc.stop(now + times[i] + durations[i]);
+        });
+      }
+    }
+    const sfx = new SoundEngine();
+
+    function toggleMute() {
+      sfx.muted = !sfx.muted;
+      document.getElementById('btnMute').innerHTML = sfx.muted ? '🔇 Tắt Âm' : '🔊 Bật Âm';
+    }
+
+    /* -------------------------------------------------------------
+     * 2. TEAMS & SCOREBOARD MANAGEMENT (Persisted via LocalStorage)
+     * ------------------------------------------------------------- */
+    let teams = [
+      { id: 1, name: "Team 1: Kernel Panic", score: 0, cards: { askT: false, askF: false, h50: false, sabotage: false } },
+      { id: 2, name: "Team 2: 404 Not Found", score: 0, cards: { askT: false, askF: false, h50: false, sabotage: false } },
+      { id: 3, name: "Team 3: Task Manager", score: 0, cards: { askT: false, askF: false, h50: false, sabotage: false } },
+      { id: 4, name: "Team 4: Relative Path", score: 0, cards: { askT: false, askF: false, h50: false, sabotage: false } },
+      { id: 5, name: "Team 5: Binary Bosses", score: 0, cards: { askT: false, askF: false, h50: false, sabotage: false } },
+      { id: 6, name: "Team 6: Cyber Survival", score: 0, cards: { askT: false, askF: false, h50: false, sabotage: false } },
+      { id: 7, name: "Team 7: AI Champions", score: 0, cards: { askT: false, askF: false, h50: false, sabotage: false } }
+    ];
+
+    function loadTeamsState() {
+      const saved = localStorage.getItem('it_game_show_teams_k26');
+      if (saved) {
+        try { teams = JSON.parse(saved); } catch (e) { }
+      }
+    }
+
+    function saveTeamsState() {
+      localStorage.setItem('it_game_show_teams_k26', JSON.stringify(teams));
+    }
+
+    function renderTeams() {
+      const container = document.getElementById('teamsContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const sortedRanks = [...teams].sort((a, b) => b.score - a.score);
+
+      teams.forEach((t, idx) => {
+        const rankIndex = sortedRanks.findIndex(st => st.id === t.id) + 1;
+        let rankClass = '';
+        let rankBadge = rankIndex;
+        if (rankIndex === 1) { rankClass = 'rank-1'; rankBadge = '👑 1'; }
+        else if (rankIndex === 2) { rankClass = 'rank-2'; rankBadge = '🥈 2'; }
+        else if (rankIndex === 3) { rankClass = 'rank-3'; rankBadge = '🥉 3'; }
+
+        const card = document.createElement('div');
+        card.className = `team-card ${rankClass}`;
+        card.innerHTML = `
+      <div class="team-header">
+        <div class="team-rank-badge">${rankBadge}</div>
+        <input type="text" class="team-name-input" value="${escapeHtml(t.name)}" 
+          onchange="updateTeamName(${t.id}, this.value)" 
+          aria-label="Tên đội ${idx + 1}">
+        <div class="team-score-display">${t.score}</div>
+      </div>
+
+      <div class="score-buttons">
+        <button class="btn-score minus" onclick="changeScore(${t.id}, -2)">-2</button>
+        <button class="btn-score minus" onclick="changeScore(${t.id}, -1)">-1</button>
+        <button class="btn-score" onclick="changeScore(${t.id}, 1)">+1</button>
+        <button class="btn-score" onclick="changeScore(${t.id}, 2)">+2</button>
+        <button class="btn-score" onclick="changeScore(${t.id}, 3)">+3</button>
+        <button class="btn-score" onclick="changeScore(${t.id}, 5)">+5</button>
+      </div>
+
+      <div class="special-cards-row">
+        <div class="badge-card ${t.cards?.askT ? 'used' : ''}" onclick="toggleSpecialCard(${t.id}, 'askT')">
+          🙋‍♂️ Hỏi GV (-1)
+        </div>
+        <div class="badge-card ${t.cards?.askF ? 'used' : ''}" onclick="toggleSpecialCard(${t.id}, 'askF')">
+          🤝 Hỏi Đội Bạn
+        </div>
+        <div class="badge-card ${t.cards?.h50 ? 'used' : ''}" onclick="toggleSpecialCard(${t.id}, 'h50')">
+          ⚡ 50:50
+        </div>
+        <div class="badge-card ${t.cards?.sabotage ? 'used' : ''}" onclick="toggleSpecialCard(${t.id}, 'sabotage')">
+          💣 Phá Hoại (-2)
+        </div>
+        <button style="margin-left:auto; background:transparent; border:none; color:var(--red); cursor:pointer; font-size:0.8rem;" onclick="removeTeam(${t.id})">❌ Xóa</button>
+      </div>
+    `;
+        container.appendChild(card);
+      });
+
+      const tag = document.getElementById('teamCountTag');
+      if (tag) tag.textContent = `${teams.length} Đội Thi`;
+      drawWheel();
+      saveTeamsState();
+      renderPresScoringStrip();
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+
+    function updateTeamName(id, val) {
+      const t = teams.find(x => x.id === id);
+      if (t) {
+        t.name = val || `Đội ${id}`;
+        saveTeamsState();
+        drawWheel();
+        renderPresScoringStrip();
+      }
+    }
+
+    function changeScore(id, delta) {
+      const t = teams.find(x => x.id === id);
+      if (t) {
+        t.score += delta;
+        if (delta > 0) sfx.playCorrect();
+        else sfx.playWrong();
+        renderTeams();
+      }
+    }
+
+    function toggleSpecialCard(id, cardKey) {
+      const t = teams.find(x => x.id === id);
+      if (t) {
+        if (!t.cards) t.cards = {};
+        t.cards[cardKey] = !t.cards[cardKey];
+        sfx.playBeep();
+        renderTeams();
+      }
+    }
+
+    function addTeam() {
+      const newId = teams.length > 0 ? Math.max(...teams.map(t => t.id)) + 1 : 1;
+      teams.push({
+        id: newId,
+        name: `Team ${newId}`,
+        score: 0,
+        cards: { askT: false, askF: false, h50: false, sabotage: false }
+      });
+      sfx.playCorrect();
+      renderTeams();
+    }
+
+    function removeTeam(id) {
+      if (confirm("Bạn có chắc muốn xóa đội này không?")) {
+        teams = teams.filter(t => t.id !== id);
+        renderTeams();
+      }
+    }
+
+    function sortTeams() {
+      teams.sort((a, b) => b.score - a.score);
+      sfx.playFanfare();
+      renderTeams();
+    }
+
+    function resetScores() {
+      if (confirm("Reset lại điểm của tất cả các đội về 0?")) {
+        teams.forEach(t => {
+          t.score = 0;
+          t.cards = { askT: false, askF: false, h50: false, sabotage: false };
+        });
+        sfx.playBeep();
+        renderTeams();
+      }
+    }
+
+    /* -------------------------------------------------------------
+     * 3. GLOBAL TIMERS
+     * ------------------------------------------------------------- */
+    let globalTimeSeconds = 120 * 60;
+    let globalTimerInterval = null;
+
+    function formatTime(secs) {
+      const m = Math.floor(secs / 60).toString().padStart(2, '0');
+      const s = (secs % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    function updateGlobalTimerDisplay() {
+      document.getElementById('globalTimer').textContent = formatTime(globalTimeSeconds);
+    }
+
+    function toggleGlobalTimer() {
+      const btn = document.getElementById('btnStartTimer');
+      if (globalTimerInterval) {
+        clearInterval(globalTimerInterval);
+        globalTimerInterval = null;
+        btn.textContent = '▶️';
+      } else {
+        btn.textContent = '⏸️';
+        globalTimerInterval = setInterval(() => {
+          if (globalTimeSeconds > 0) {
+            globalTimeSeconds--;
+            updateGlobalTimerDisplay();
+            if (globalTimeSeconds === 0) {
+              sfx.playFanfare();
+              alert("⏱️ Đã hết 120 phút thời gian môn học!");
+            }
+          }
+        }, 1000);
+      }
+    }
+
+    function resetGlobalTimer() {
+      if (globalTimerInterval) {
+        clearInterval(globalTimerInterval);
+        globalTimerInterval = null;
+      }
+      globalTimeSeconds = 120 * 60;
+      document.getElementById('btnStartTimer').textContent = '▶️';
+      updateGlobalTimerDisplay();
+    }
+
+    function startStageTimer(seconds) {
+      let timeLeft = seconds;
+      sfx.playBeep();
+      const modal = document.createElement('div');
+      modal.className = 'modal-overlay active';
+      modal.style.zIndex = '3000';
+      modal.innerHTML = `
+    <div class="modal-box" style="border-color: var(--cyan);">
+      <h3 style="color:var(--text-muted); font-size:1.2rem;">⏱️ ĐẾM NGƯỢC THỜI GIAN</h3>
+      <div id="stageCountdown" style="font-family: var(--font-code); font-size: 5rem; font-weight: 800; color: var(--cyan); margin: 20px 0;">${timeLeft}s</div>
+      <button class="btn-icon btn-danger" onclick="this.closest('.modal-overlay').remove()">Hủy Timer</button>
+    </div>
+  `;
+      document.body.appendChild(modal);
+
+      const countdownEl = modal.querySelector('#stageCountdown');
+      const timer = setInterval(() => {
+        timeLeft--;
+        if (timeLeft >= 0) {
+          countdownEl.textContent = `${timeLeft}s`;
+          if (timeLeft <= 5) sfx.playBeep();
+        } else {
+          clearInterval(timer);
+          sfx.playFanfare();
+          countdownEl.textContent = "HẾT GIỜ!";
+          countdownEl.style.color = "var(--red)";
+        }
+      }, 1000);
+    }
+
+    /* -------------------------------------------------------------
+     * 4. TAB & STAGE NAVIGATION
+     * ------------------------------------------------------------- */
+    function switchTab(tabId, btnEl) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+      btnEl.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+
+      if (tabId === 'tab-wheel') {
+        setTimeout(drawWheel, 50);
+      }
+    }
+
+    function switchStage(stageNum, btnEl) {
+      document.querySelectorAll('.stage-step').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.stage-content').forEach(c => c.style.display = 'none');
+
+      btnEl.classList.add('active');
+      document.getElementById(`stage-${stageNum}`).style.display = 'block';
+    }
+
+    /* -------------------------------------------------------------
+     * 5. STAGE 1 FULL PRESENTATION QUIZ SYSTEM (30 QUESTIONS)
+     * ------------------------------------------------------------- */
+    let stage1Data = [
+      {
+        id: 1,
+        type: "fill",
+        question: "Trong hệ điều hành, [1] làm việc trực tiếp với CPU và RAM, còn [2] cung cấp giao diện cho người dùng nhập câu lệnh.",
+        blanksCount: 2,
+        blanksInfo: [
+          { num: 1, word: "Kernel", charCount: 6, note: "(6 ký tự)" },
+          { num: 2, word: "Shell", charCount: 5, note: "(5 ký tự)" }
+        ],
+        answer: "1: Kernel  |  2: Shell",
+        explanation: "Kernel là nhân hệ điều hành tương tác với phần cứng; Shell là lớp vỏ nhận câu lệnh từ người dùng."
+      },
+      {
+        id: 2,
+        type: "choice",
+        question: "Giao diện nào sau đây được coi là 'vũ khí' tối thượng của Developer chuyên nghiệp khi làm việc với máy chủ server?",
+        options: [
+          { key: "A", text: "GUI (Giao diện đồ họa dùng chuột)" },
+          { key: "B", text: "CLI (Giao diện dòng lệnh Command Line)" },
+          { key: "C", text: "API (Giao diện lập trình ứng dụng)" },
+          { key: "D", text: "BIOS (Hệ thống đầu vào ra cơ bản)" }
+        ],
+        answer: "B. CLI (Giao diện dòng lệnh Command Line)",
+        explanation: "CLI giúp quản lý server từ xa mượt mà, tự động hóa cực nhanh mà không tốn RAM chạy giao diện đồ họa."
+      },
+      {
+        id: 3,
+        type: "choice",
+        question: "Hệ điều hành nào chiếm trên 90% số lượng máy chủ (server) và hạ tầng đám mây (cloud) trên thế giới?",
+        options: [
+          { key: "A", text: "Windows Server" },
+          { key: "B", text: "macOS Server" },
+          { key: "C", text: "Linux" },
+          { key: "D", text: "Android OS" }
+        ],
+        answer: "C. Linux",
+        explanation: "Linux có độ ổn định cực cao, mã nguồn mở miễn phí và tối ưu cho server."
+      },
+      {
+        id: 4,
+        type: "fill",
+        question: "Muốn lập trình ứng dụng cho hệ sinh thái iOS (iPhone/iPad) bắt buộc phải dùng hệ điều hành [1] và ngôn ngữ lập trình chính [2].",
+        blanksCount: 2,
+        blanksInfo: [
+          { num: 1, word: "macOS", charCount: 5, note: "(5 ký tự)" },
+          { num: 2, word: "Swift", charCount: 5, note: "(5 ký tự)" }
+        ],
+        answer: "1: macOS  |  2: Swift (hoặc Objective-C)",
+        explanation: "Apple yêu cầu môi trường Xcode chỉ chạy trên hệ điều hành macOS."
+      },
+      {
+        id: 5,
+        type: "choice",
+        question: "Để tránh nguy cơ mất sạch bài tập khi máy tính bị lỗi hệ điều hành hoặc phải cài lại Windows, bạn NÊN lưu dữ liệu ở đâu?",
+        options: [
+          { key: "A", text: "Màn hình Desktop (thuộc ổ C:\\)" },
+          { key: "B", text: "Thư mục Downloads" },
+          { key: "C", text: "Thư mục Documents thuộc ổ C:\\" },
+          { key: "D", text: "Ổ D:\\, Ổ E:\\ hoặc Đám mây (Google Drive / OneDrive)" }
+        ],
+        answer: "D. Ổ D:\\, Ổ E:\\ hoặc Đám mây (Google Drive / OneDrive)",
+        explanation: "Ổ C:\\ chứa hệ điều hành sẽ bị format sạch khi cài lại Win."
+      },
+      {
+        id: 6,
+        type: "fill",
+        question: "Trong đường dẫn tệp tin: Ký hiệu [1] biểu diễn cho thư mục hiện tại, còn ký hiệu [2] biểu diễn cho thư mục cha.",
+        blanksCount: 2,
+        blanksInfo: [
+          { num: 1, word: ".", charCount: 1, note: "(1 ký tự)" },
+          { num: 2, word: "..", charCount: 2, note: "(2 ký tự)" }
+        ],
+        answer: "1: . (một dấu chấm)  |  2: .. (hai dấu chấm)",
+        explanation: "Trong Relative Path, . chỉ thư mục hiện tại, .. lùi ra thư mục cha."
+      },
+      {
+        id: 7,
+        type: "choice",
+        question: "Trong các dự án Web/Code, loại đường dẫn (path) nào NÊN được sử dụng để khi chép dự án sang máy khác không bị vỡ liên kết ảnh?",
+        options: [
+          { key: "A", text: "Absolute Path (Tuyệt đối như C:\\Users\\...)" },
+          { key: "B", text: "Relative Path (Tương đối như ./images/logo.png)" },
+          { key: "C", text: "Network Path (Đường dẫn mạng nội bộ)" },
+          { key: "D", text: "Full Drive Root Path" }
+        ],
+        answer: "B. Relative Path (Đường dẫn tương đối)",
+        explanation: "Relative Path liên kết tệp dựa trên vị trí tương đối trong thư mục dự án nên chép đi đâu cũng đúng."
+      },
+      {
+        id: 8,
+        type: "choice",
+        question: "Quy chuẩn đặt tên tệp tin và thư mục nào sau đây được khuyến nghị trong dự án CNTT để tránh lỗi hệ thống?",
+        options: [
+          { key: "A", text: "kebab-case (viết thường, gạch ngang, ví dụ: bai-tap-nhom-1.docx)" },
+          { key: "B", text: "Đặt tên Tiếng Việt có dấu và khoảng trắng" },
+          { key: "C", text: "Dùng ký tự đặc biệt như: bài_tập_final(mới nhất)!.docx" },
+          { key: "D", text: "Title Case có ngoặc đơn" }
+        ],
+        answer: "A. kebab-case (viết thường, phân cách bằng dấu gạch ngang)",
+        explanation: "Giúp tương thích 100% trên cả Windows, Linux, macOS và Server Web."
+      },
+      {
+        id: 9,
+        type: "fill",
+        question: "Bật tính năng [1] trên Windows giúp người dùng phát hiện các tệp độc hại giả mạo (ví dụ: tệp nguy hiểm anh-dep.pdf[2]).",
+        blanksCount: 2,
+        blanksInfo: [
+          { num: 1, word: "File extensions", charCount: 15, note: "(15 ký tự)" },
+          { num: 2, word: ".exe", charCount: 4, note: "(4 ký tự)" }
+        ],
+        answer: "1: File name extensions (Hiển thị đuôi file)  |  2: .exe",
+        explanation: "Kẻ gian hay giấu đuôi .exe đằng sau đuôi .pdf để lừa người dùng mở virus."
+      },
+      {
+        id: 10,
+        type: "choice",
+        question: "Hành động 'Một người dùng bấm nút xem 5 bộ phim hành động trên ứng dụng' thuộc tầng nào trong Kim tự tháp DIKW?",
+        options: [
+          { key: "A", text: "Data (Dữ liệu thô)" },
+          { key: "B", text: "Information (Thông tin)" },
+          { key: "C", text: "Knowledge (Tri thức)" },
+          { key: "D", text: "Wisdom (Trí tuệ)" }
+        ],
+        answer: "A. Data (Dữ liệu thô)",
+        explanation: "Đây là các dữ kiện thô ghi nhận từ hành vi bấm, chưa qua phân tích ngữ cảnh."
+      },
+      {
+        id: 11,
+        type: "fill",
+        question: "Công thức cơ bản tạo nên Thông tin: Thông tin = Dữ liệu thô + [1] + [2].",
+        blanksCount: 2,
+        blanksInfo: [
+          { num: 1, word: "Context", charCount: 8, note: "(7 - 8 ký tự)" },
+          { num: 2, word: "Purpose", charCount: 8, note: "(7 - 8 ký tự)" }
+        ],
+        answer: "1: Ngữ cảnh (Context)  |  2: Mục đích (Purpose)",
+        explanation: "Dữ liệu thô khi đặt trong ngữ cảnh và mục đích rõ ràng sẽ biến thành Thông tin có giá trị."
+      },
+      {
+        id: 12,
+        type: "choice",
+        question: "Dung lượng 1 Gigabyte (1 GB) bằng chính xác bao nhiêu Megabyte (MB) theo chuẩn nhị phân (2^10)?",
+        options: [
+          { key: "A", text: "1000 MB" },
+          { key: "B", text: "1024 MB" },
+          { key: "C", text: "100 MB" },
+          { key: "D", text: "2048 MB" }
+        ],
+        answer: "B. 1024 MB",
+        explanation: "1 GB = 2^10 MB = 1024 MB."
+      },
+      {
+        id: 13,
+        type: "fill",
+        question: "Mô hình xử lý dữ liệu cơ bản của máy tính (IPO) gồm 3 bước: [1] (Đầu vào) ➔ [2] (Xử lý) ➔ [3] (Đầu ra).",
+        blanksCount: 3,
+        blanksInfo: [
+          { num: 1, word: "Input", charCount: 5, note: "(5 ký tự)" },
+          { num: 2, word: "Process", charCount: 7, note: "(7 ký tự)" },
+          { num: 3, word: "Output", charCount: 6, note: "(6 ký tự)" }
+        ],
+        answer: "1: Input  |  2: Process  |  3: Output",
+        explanation: "Mô hình IPO là nguyên lý cốt lõi của mọi hệ thống máy tính."
+      },
+      {
+        id: 14,
+        type: "choice",
+        question: "Khi mở Task Manager thấy chỉ số CPU báo 98% kéo dài và máy giật lag, điều này thể hiện trạng thái gì?",
+        options: [
+          { key: "A", text: "Máy tính đang ở chế độ tiết kiệm pin" },
+          { key: "B", text: "CPU đang bị quá tải do tiến trình chiếm dụng tài nguyên" },
+          { key: "C", text: "Ổ cứng SSD bị hỏng" },
+          { key: "D", text: "RAM đang hoạt động 100%" }
+        ],
+        answer: "B. CPU đang bị quá tải do tiến trình chiếm dụng tài nguyên",
+        explanation: "Cần kiểm tra Task Manager để End Task tiến trình đang làm CPU quá tải."
+      },
+      {
+        id: 15,
+        type: "fill",
+        question: "Phím tắt thần thánh để mở trực tiếp Task Manager là [1], còn phím tắt mở File Explorer nhanh là [2].",
+        blanksCount: 2,
+        blanksInfo: [
+          { num: 1, word: "Ctrl+Shift+Esc", charCount: 3, note: "(Tổ hợp 3 phím)" },
+          { num: 2, word: "Win+E", charCount: 2, note: "(Tổ hợp 2 phím)" }
+        ],
+        answer: "1: Ctrl + Shift + Esc  |  2: Win + E",
+        explanation: "Ctrl+Shift+Esc mở ngay Task Manager; Win+E mở nhanh File Explorer."
+      },
+      {
+        id: 16,
+        type: "choice",
+        question: "Lĩnh vực nào sau đây chiếm khoảng 80% nhu cầu tuyển dụng nhân sự CNTT tại Việt Nam hiện nay?",
+        options: [
+          { key: "A", text: "Data Science (Khoa học dữ liệu)" },
+          { key: "B", text: "Software Engineering (Kỹ thuật phần mềm)" },
+          { key: "C", text: "Cybersecurity (An toàn thông tin)" },
+          { key: "D", text: "IoT & Embedded Systems (Hệ thống nhúng)" }
+        ],
+        answer: "B. Software Engineering (Kỹ thuật phần mềm)",
+        explanation: "Kỹ thuật phần mềm chiếm khoảng 80% nhu cầu tuyển dụng lập trình Web/App/Hệ thống."
+      },
+      {
+        id: 17,
+        type: "fill",
+        question: "Quy chuẩn đặt tên biến trong ngôn ngữ Javascript/Java thường dùng kiểu [1], còn tên hàm/file trong Python dùng kiểu [2].",
+        blanksCount: 2,
+        blanksInfo: [
+          { num: 1, word: "camelCase", charCount: 9, note: "(9 ký tự)" },
+          { num: 2, word: "snake_case", charCount: 10, note: "(10 ký tự)" }
+        ],
+        answer: "1: camelCase  |  2: snake_case",
+        explanation: "camelCase viết hoa chữ cái đầu từ thứ 2; snake_case dùng dấu gạch dưới _."
+      },
+      {
+        id: 18,
+        type: "choice",
+        question: "Khi cài máy mới cho Developer, hai mục nào trong File Explorer NÊN luôn được BẬT (ON)?",
+        options: [
+          { key: "A", text: "File name extensions & Hidden items" },
+          { key: "B", text: "Compact view & Navigation pane" },
+          { key: "C", text: "Item check boxes & Large icons" },
+          { key: "D", text: "Status bar & Details pane" }
+        ],
+        answer: "A. File name extensions & Hidden items",
+        explanation: "Giúp kiểm tra đuôi file thật (.exe giả mạo) và hiển thị các tệp/thư mục ẩn như .git, .env."
+      },
+      {
+        id: 19,
+        type: "fill",
+        question: "Tốc độ khởi động Windows trên ổ đĩa rắn [1] chỉ mất khoảng 8–15 giây, nhanh hơn gấp 4-5 lần so với ổ đĩa cơ quay [2].",
+        blanksCount: 2,
+        blanksInfo: [
+          { num: 1, word: "SSD", charCount: 3, note: "(3 ký tự)" },
+          { num: 2, word: "HDD", charCount: 3, note: "(3 ký tự)" }
+        ],
+        answer: "1: SSD  |  2: HDD",
+        explanation: "SSD dùng chip NAND Flash không cơ học nên tốc độ đọc ghi vượt trội hơn HDD."
+      },
+      {
+        id: 20,
+        type: "choice",
+        question: "Phím tắt nào giúp bôi đen nhanh thanh địa chỉ (Address Bar) trong File Explorer để copy đường dẫn thư mục?",
+        options: [
+          { key: "A", text: "Ctrl + L" },
+          { key: "B", text: "Alt + D" },
+          { key: "C", text: "Shift + Tab" },
+          { key: "D", text: "F5" }
+        ],
+        answer: "B. Alt + D",
+        explanation: "Alt + D giúp nhảy lên bôi đen Address Bar ➔ Ctrl+C để copy path siêu tốc."
+      },
+      {
+        id: 21,
+        type: "fill",
+        question: "Trạng thái máy tính trong tương lai, nơi một hạt Qubit có thể ở trạng thái vừa là 0 vừa là 1 được gọi là máy tính [1].",
+        blanksCount: 1,
+        blanksInfo: [
+          { num: 1, word: "Quantum", charCount: 7, note: "(7 ký tự)" }
+        ],
+        answer: "1: Quantum (Máy tính lượng tử)",
+        explanation: "Máy tính lượng tử (Quantum Computer) sử dụng nguyên lý chồng tọa độ (Superposition) của Qubit."
+      },
+      {
+        id: 22,
+        type: "choice",
+        question: "Hệ thống máy tính quy mô khổng lồ xử lý 90% giao dịch thẻ tín dụng và hệ thống Core Banking ngân hàng là loại máy tính nào?",
+        options: [
+          { key: "A", text: "Supercomputer (Siêu máy tính)" },
+          { key: "B", text: "Mainframe" },
+          { key: "C", text: "Personal Computer (PC)" },
+          { key: "D", text: "Microcontroller" }
+        ],
+        answer: "B. Mainframe",
+        explanation: "Mainframe (như IBM System Z) nổi tiếng với độ tin cậy và khả năng xử lý giao dịch tài chính cực lớn."
+      },
+      {
+        id: 23,
+        type: "fill",
+        question: "Tầng cao nhất trong Kim tự tháp DIKW giúp đánh giá giá trị dài hạn, tính đạo đức và đưa ra quyết định đúng đắn là tầng [1].",
+        blanksCount: 1,
+        blanksInfo: [
+          { num: 1, word: "Wisdom", charCount: 6, note: "(6 ký tự)" }
+        ],
+        answer: "1: Wisdom (Trí tuệ / Khôn ngoan)",
+        explanation: "Wisdom là tầng cao nhất giúp đánh giá giá trị dài hạn và ra quyết định thông minh."
+      },
+      {
+        id: 24,
+        type: "choice",
+        question: "Thư mục nào trên hệ điều hành Windows được ví như 'trạm transit tạm thời' cho các tệp tải về và NÊN dọn dẹp cuối tuần?",
+        options: [
+          { key: "A", text: "Documents" },
+          { key: "B", text: "Downloads" },
+          { key: "C", text: "C:\\Windows" },
+          { key: "D", text: "Program Files" }
+        ],
+        answer: "B. Downloads",
+        explanation: "Downloads là chỗ chứa tạm, nên gom nhóm Sort by Type kéo thả phân loại sang ổ D:\\ và xóa file cài đặt .exe."
+      },
+      {
+        id: 25,
+        type: "fill",
+        question: "Vai trò [1] đóng vai trò là cầu nối giữa khách hàng và đội ngũ kỹ thuật để phân tích yêu cầu sản phẩm phần mềm.",
+        blanksCount: 1,
+        blanksInfo: [
+          { num: 1, word: "BA", charCount: 2, note: "(2 ký tự viết tắt)" }
+        ],
+        answer: "1: BA (Business Analyst)",
+        explanation: "Business Analyst (BA) lắng nghe nhu cầu kinh doanh của khách hàng và chuyển thể thành mô tả kỹ thuật."
+      },
+      {
+        id: 26,
+        type: "choice",
+        question: "Ba điều cấm kỵ hàng đầu khi đặt tên cho File và Thư mục dự án CNTT bao gồm những điều nào sau đây?",
+        options: [
+          { key: "A", text: "Không viết hoa, không gạch ngang, không dùng số" },
+          { key: "B", text: "Không Tiếng Việt có dấu, Không khoảng trắng, Không dùng 9 ký tự cấm" },
+          { key: "C", text: "Không dài quá 10 ký tự" },
+          { key: "D", text: "Không chứa chữ cái Tiếng Anh" }
+        ],
+        answer: "B. Không Tiếng Việt có dấu, Không khoảng trắng, Không dùng 9 ký tự cấm",
+        explanation: "Tránh lỗi mã hóa mã nguồn trên server Linux và tránh làm Terminal hiểu nhầm khoảng trắng thành tham số."
+      },
+      {
+        id: 27,
+        type: "fill",
+        question: "Chip xử lý chuyên dụng dành cho các tác vụ Trí tuệ nhân tạo và Deep Learning ngay trên thiết bị điện thoại/laptop là chip [1].",
+        blanksCount: 1,
+        blanksInfo: [
+          { num: 1, word: "NPU", charCount: 3, note: "(3 ký tự viết tắt)" }
+        ],
+        answer: "1: NPU (Neural Processing Unit)",
+        explanation: "NPU giúp tăng tốc xử lý các mô hình AI/ML trực tiếp trên phần cứng thiết bị."
+      },
+      {
+        id: 28,
+        type: "choice",
+        question: "Khi mở nhiều tab Google Chrome cùng lúc, tài nguyên phần cứng nào của máy tính sẽ bị chiếm dụng và tăng lên ngay lập tức?",
+        options: [
+          { key: "A", text: "GPU (Card màn hình)" },
+          { key: "B", text: "RAM (Bộ nhớ trong)" },
+          { key: "C", text: "Dung lượng đĩa D:\\" },
+          { key: "D", text: "Tốc độ Wi-Fi" }
+        ],
+        answer: "B. RAM (Bộ nhớ trong)",
+        explanation: "Mỗi tab Chrome là một tiến trình ngốn RAM. Khi đóng tab HĐH sẽ giải phóng thu hồi RAM ngay."
+      },
+      {
+        id: 29,
+        type: "fill",
+        question: "Thư mục cấm tuyệt đối không tự ý xóa hay chỉnh sửa thủ công trên ổ hệ thống Windows là thư mục [1].",
+        blanksCount: 1,
+        blanksInfo: [
+          { num: 1, word: "C:\\Windows", charCount: 10, note: "(10 ký tự)" }
+        ],
+        answer: "1: C:\\Windows\\",
+        explanation: "C:\\Windows chứa các tập tin nhân cốt lõi của hệ điều hành, xóa nhầm sẽ hỏng Win."
+      },
+      {
+        id: 30,
+        type: "choice",
+        question: "Kỷ nguyên Big Data ghi nhận các đơn vị lưu trữ cực lớn: 1 Petabyte (PB) bằng 1024 TB, còn 1 Exabyte (EB) bằng chính xác bao nhiêu PB?",
+        options: [
+          { key: "A", text: "1000 PB" },
+          { key: "B", text: "1024 PB" },
+          { key: "C", text: "2048 PB" },
+          { key: "D", text: "4096 PB" }
+        ],
+        answer: "B. 1024 PB",
+        explanation: "1 EB = 1024 PB = 1,048,576 TB."
+      }
+    ];
+
+    let currentPresIndex = 0;
+    let presTimerInterval = null;
+
+    function shuffleStage1Questions() {
+      for (let i = stage1Data.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [stage1Data[i], stage1Data[j]] = [stage1Data[j], stage1Data[i]];
+      }
+      renderStage1Grid();
+      sfx.playFanfare();
+      alert("🎲 Đã xáo trộn ngẫu nhiên toàn bộ 30 câu hỏi!");
+    }
+
+    function startStage1RandomGame() {
+      for (let i = stage1Data.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [stage1Data[i], stage1Data[j]] = [stage1Data[j], stage1Data[i]];
+      }
+      renderStage1Grid();
+      openStage1QuizModal(0);
+    }
+
+    function renderStage1Grid() {
+      const container = document.getElementById('stage1Grid');
+      if (!container) return;
+      container.innerHTML = '';
+
+      stage1Data.forEach((d, idx) => {
+        const card = document.createElement('div');
+        card.className = 'q-grid-card';
+        card.onclick = () => openStage1QuizModal(idx);
+
+        const isChoice = d.type === 'choice';
+        const tagClass = isChoice ? 'q-tag-choice' : 'q-tag-fill';
+        const tagText = isChoice ? 'Trắc nghiệm (A,B,C,D)' : 'Điền Từ';
+
+        card.innerHTML = `
+      <div class="q-grid-badge">
+        <span style="color:var(--cyan); font-weight:800;">CÂU ${d.id}</span>
+        <span class="q-tag-type ${tagClass}">${tagText}</span>
+      </div>
+      <div style="font-weight:600; color:#fff; font-size:0.95rem; line-height:1.4;">${d.question}</div>
+      <div style="margin-top:auto; font-size:0.8rem; color:var(--cyan); font-weight:700;">🚀 Bấm để chiếu slide màn hình ➔</div>
+    `;
+        container.appendChild(card);
+      });
+    }
+
+    function openStage1QuizModal(index) {
+      currentPresIndex = index;
+      renderPresQuestion();
+      document.getElementById('stage1QuizModal').classList.add('active');
+      sfx.playBeep();
+    }
+
+    function closeStage1QuizModal() {
+      if (presTimerInterval) { clearInterval(presTimerInterval); presTimerInterval = null; }
+      document.getElementById('stage1QuizModal').classList.remove('active');
+    }
+
+    function renderPresQuestion() {
+      const d = stage1Data[currentPresIndex];
+      if (!d) return;
+
+      // Header tags
+      document.getElementById('presIndexTag').textContent = `CÂU ${d.id} / ${stage1Data.length}`;
+      const typeTag = document.getElementById('presTypeTag');
+      if (d.type === 'choice') {
+        typeTag.textContent = 'TRẮC NGHIỆM (A, B, C, D)';
+        typeTag.className = 'q-tag-type q-tag-choice';
+      } else {
+        typeTag.textContent = `ĐIỀN TỪ [1]..[${d.blanksCount}]`;
+        typeTag.className = 'q-tag-type q-tag-fill';
+      }
+
+      // Question text
+      document.getElementById('presQuestionText').innerHTML = d.question.replace(/\[(\d+)\]/g, '<span style="color:var(--gold); font-weight:800; text-decoration:underline;">[$1]</span>');
+
+      // Content grid or fill guide
+      const contentBox = document.getElementById('presQuestionContent');
+      contentBox.innerHTML = '';
+
+      if (d.type === 'choice') {
+        const grid = document.createElement('div');
+        grid.className = 'pres-options-grid';
+        d.options.forEach(opt => {
+          const btn = document.createElement('div');
+          btn.className = 'pres-option-btn';
+          btn.innerHTML = `
+        <div class="pres-option-key">${opt.key}</div>
+        <div>${opt.text}</div>
+      `;
+          grid.appendChild(btn);
+        });
+        contentBox.appendChild(grid);
+      } else {
+        const guide = document.createElement('div');
+        guide.className = 'pres-fill-guide';
+        let placeholdersHtml = '';
+        
+        if (d.blanksInfo && d.blanksInfo.length > 0) {
+          d.blanksInfo.forEach(b => {
+            let slots = '';
+            for (let i = 0; i < b.charCount; i++) {
+              slots += `<span class="char-slot">_</span>`;
+            }
+            placeholdersHtml += `
+              <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(0,0,0,0.45); padding:8px 14px; border-radius:12px; border:1px solid rgba(255,209,102,0.4); margin:6px 8px;">
+                <span style="font-family:var(--font-code); font-weight:800; font-size:1.3rem; color:var(--gold);">[${b.num}]:</span>
+                <div style="display:flex; align-items:center;">${slots}</div>
+                <span style="font-size:0.82rem; color:var(--cyan); font-weight:700; margin-left:4px;">${b.note || ''}</span>
+              </div>
+            `;
+          });
+        } else {
+          for (let b = 1; b <= d.blanksCount; b++) {
+            placeholdersHtml += `<span style="display:inline-block; margin:4px 12px; background:rgba(0,0,0,0.4); padding:6px 16px; border-radius:8px; font-family:var(--font-code); font-weight:800; font-size:1.3rem;">[${b}]: _________________</span>`;
+          }
+        }
+
+        guide.innerHTML = `
+      <h3 style="font-size:1.3rem; margin-bottom:12px;">✍️ HƯỚNG DẪN VIẾT BẢNG (ĐÚNG SỐ KÝ TỰ / CHỮ CÁI):</h3>
+      <div style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center;">${placeholdersHtml}</div>
+    `;
+        contentBox.appendChild(guide);
+      }
+
+      // Reset answer box
+      const ansBox = document.getElementById('presAnswerBox');
+      ansBox.classList.remove('active');
+      document.getElementById('presAnswerContent').innerHTML = d.answer;
+      document.getElementById('presExplanationContent').innerHTML = d.explanation ? `💡 Giải thích: ${d.explanation}` : '';
+
+      renderPresScoringStrip();
+    }
+
+    function togglePresAnswer() {
+      const ansBox = document.getElementById('presAnswerBox');
+      if (ansBox.classList.contains('active')) {
+        ansBox.classList.remove('active');
+      } else {
+        ansBox.classList.add('active');
+        sfx.playFanfare();
+      }
+    }
+
+    function renderPresScoringStrip() {
+      const container = document.getElementById('presScoringTeams');
+      if (!container) return;
+      container.innerHTML = '';
+
+      teams.forEach(t => {
+        const box = document.createElement('div');
+        cardName = t.name.length > 15 ? t.name.substring(0, 15) + '...' : t.name;
+        box.className = 'pres-team-btn-box';
+        box.innerHTML = `
+      <div class="name" title="${escapeHtml(t.name)}">${escapeHtml(cardName)}</div>
+      <div class="score">${t.score}đ</div>
+      <div style="display:flex; gap:4px; justify-content:center;">
+        <button class="btn-mini" style="background:var(--green);" onclick="changeScore(${t.id}, 1)">+1</button>
+        <button class="btn-mini" style="background:var(--gold);" onclick="changeScore(${t.id}, 2)">+2</button>
+        <button class="btn-mini" style="background:var(--red); color:#fff;" onclick="changeScore(${t.id}, -1)">-1</button>
+      </div>
+    `;
+        container.appendChild(box);
+      });
+    }
+
+    function navigatePresQuestion(dir) {
+      currentPresIndex += dir;
+      if (currentPresIndex < 0) currentPresIndex = stage1Data.length - 1;
+      if (currentPresIndex >= stage1Data.length) currentPresIndex = 0;
+      renderPresQuestion();
+      sfx.playBeep();
+    }
+
+    function runPresTimer(seconds) {
+      if (presTimerInterval) clearInterval(presTimerInterval);
+      let timeLeft = seconds;
+      const display = document.getElementById('presTimerDisplay');
+      display.textContent = `⏱️ ${timeLeft}s`;
+      display.style.color = 'var(--gold)';
+      sfx.playBeep();
+
+      presTimerInterval = setInterval(() => {
+        timeLeft--;
+        if (timeLeft >= 0) {
+          display.textContent = `⏱️ ${timeLeft}s`;
+          if (timeLeft <= 5) sfx.playBeep();
+        } else {
+          clearInterval(presTimerInterval);
+          presTimerInterval = null;
+          display.textContent = "⏱️ HẾT GIỜ!";
+          display.style.color = "var(--red)";
+          sfx.playFanfare();
+        }
+      }, 1000);
+    }
+
+    // Keyboard shortcuts for presentation modal
+    window.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('stage1QuizModal');
+      if (!modal || !modal.classList.contains('active')) return;
+
+      if (e.key === 'ArrowRight') navigatePresQuestion(1);
+      if (e.key === 'ArrowLeft') navigatePresQuestion(-1);
+      if (e.key === ' ') { e.preventDefault(); togglePresAnswer(); }
+      if (e.key === 'Escape') closeStage1QuizModal();
+    });
+
+    /* -------------------------------------------------------------
+     * 6. STAGE 2, 3, 4 OTHER DATA INJECTIONS
+     * ------------------------------------------------------------- */
+    const evidenceData = [
+      {
+        title: "Hồ sơ #1: Đường dẫn lưu tệp",
+        desc: "Bạn Bình để duy nhất 1 file bài tập làm 2 tuần liền ở đường dẫn: <code>C:\\Users\\Binh\\Desktop\\BaiTap_Final.docx</code>",
+        err: "Lưu dữ liệu làm việc ở ổ đĩa C:\\ (Desktop). Khi Windows bị lỗi/giật lag hoặc phải cài lại Win, ổ C:\\ sẽ bị format sạch gây mất trắng bài.",
+        sol: "Tập thói quen lưu bài ở vùng an toàn ổ D:\\ hoặc E:\\, hoặc bật đồng bộ đám mây tự động (Google Drive / OneDrive)."
+      },
+      {
+        title: "Hồ sơ #2: Quy tắc đặt tên tệp",
+        desc: "File dự án được Bình đặt tên là: <code>Bài Tập Cuối Kỳ Final (mới nhất).docx</code>",
+        err: "Đặt tên tệp Tiếng Việt có dấu, khoảng trắng và ký tự ngoặc đơn. Gây lỗi mã hóa đường dẫn trên Server Linux & làm Terminal hiểu nhầm khoảng trắng thành tham số câu lệnh.",
+        sol: "Đặt tên file chuẩn kebab-case (viết thường, phân cách bằng dấu gạch ngang, ví dụ: <code>bai-tap-cuoi-ky.docx</code>)."
+      },
+      {
+        title: "Hồ sơ #3: Quản lý các bản nháp",
+        desc: "Trong folder làm việc chứa 5 file: <code>BaiTap.docx</code>, <code>BaiTap_Final.docx</code>, <code>BaiTap_Final_MoiNhat.docx</code>, <code>BaiTap_Final_Fix.docx</code>. Đến 23:59 Bình đúp chuột nộp nhầm bản chưa làm xong.",
+        err: "Đặt tên file ngây thơ 'Final / Mới nhất', cực kỳ dễ lẫn lộn giữa các bản nháp và bản hoàn chỉnh khi nộp bài.",
+        sol: "Đánh số phiên bản rõ ràng (v1.0, v2.0) hoặc dùng công cụ quản lý mã nguồn Git."
+      },
+      {
+        title: "Hồ sơ #4: Liên kết tài nguyên dự án Web",
+        desc: "Bình chép thư mục Web sang máy Giảng viên để chấm. Khi mở file HTML thì tất cả hình ảnh bị vỡ đỏ (Lỗi 404). Code ghi: <code>&lt;img src=\"C:\\Users\\Binh\\Pictures\\logo.png\"&gt;</code>",
+        err: "Dùng đường dẫn tuyệt đối (Absolute Path) gắn cứng ổ C:\\ máy cá nhân. Khi chép sang máy khác đường dẫn này không tồn tại.",
+        sol: "Luôn dùng đường dẫn tương đối (Relative Path) tính từ thư mục dự án, ví dụ: <code>&lt;img src=\"./images/logo.png\"&gt;</code>."
+      },
+      {
+        title: "Hồ sơ #5: Nhận tệp qua mạng xã hội",
+        desc: "Bình tải tệp tin từ nhóm Zalo về có tên: <code>TaiLieuOnTap_K26.pdf.exe</code> và đúp chuột mở ngay lập tức. Sau 5 giây toàn bộ máy tính bị virus mã hóa.",
+        err: "Không kiểm tra đuôi file thật đằng sau, chạy tệp thực thi độc hại (.exe) giả mạo file tài liệu PDF.",
+        sol: "Luôn BẬT tính năng 'File name extensions' trên Windows để lộ đuôi thật .exe và tuyệt đối không mở tệp .exe lạ."
+      },
+      {
+        title: "Hồ sơ #6: Cài đặt lại hệ điều hành",
+        desc: "Máy tính bị lag, Bình mang ra tiệm nhờ cài lại Windows 11 mới. Khi mở lại máy thì toàn bộ dữ liệu bài tập trong 2 tháng qua biến mất hoàn toàn.",
+        err: "Không sao lưu bài tập trước khi cài Win. Các thư mục Desktop/Downloads/Documents đều thuộc ổ C:\\ nên bị format sạch khi cài lại Win.",
+        sol: "Luôn lưu bài tập ở ổ D:\\ hoặc copy sang USB / Cloud trước khi cài lại hệ điều hành."
+      },
+      {
+        title: "Hồ sơ #7: Quản lý thư mục Downloads",
+        desc: "Thư mục Downloads của Bình có 900 tệp tin lẫn lộn từ file cài .exe, file .zip, ảnh nháp, tài liệu .docx từ đầu năm. Bình mất 15 phút không tìm thấy bài làm.",
+        err: "Coi thư mục Downloads là nơi chứa tệp cố định thay vì trạm trung chuyển tạm thời.",
+        sol: "Sort by Type để gom nhóm tệp, kéo thả phân loại vào folder trên ổ D:\\, xóa file cài .exe sau khi cài xong, dọn sạch Downloads hàng tuần."
+      },
+      {
+        title: "Hồ sơ #8: Cấu hình File Explorer cho Dev",
+        desc: "Bình muốn kiểm tra file cấu hình ẩn .env và kiểm tra đuôi tệp tin thật nhưng File Explorer chỉ hiện tên file không đuôi và không thấy file .env đâu.",
+        err: "Giữ nguyên cấu hình mặc định kém an toàn của Windows (Tắt 'File name extensions' và Tắt 'Hidden items').",
+        sol: "Vào File Explorer ➔ Tab View ➔ Show ➔ Tích chọn BẬT cả 2 mục: File name extensions và Hidden items."
+      }
+    ];
+
+    function toggleEvidenceSolution(btn) {
+      const card = btn.parentElement;
+      const solBox = card.querySelector('.solution-box');
+      if (solBox.style.display === 'none' || !solBox.style.display) {
+        solBox.style.display = 'block';
+        btn.innerHTML = '🙈 ẨN LỖI & CÁCH SỬA';
+        btn.classList.remove('btn-gold');
+        btn.classList.add('btn-primary');
+        sfx.playCorrect();
+      } else {
+        solBox.style.display = 'none';
+        btn.innerHTML = '🔍 HIỂN THỊ LỖI & CÁCH SỬA';
+        btn.classList.remove('btn-primary');
+        btn.classList.add('btn-gold');
+      }
+    }
+
+    const stage3Data = [
+      { q: "1. Thẻ nhớ 128 GB. Mỗi bức ảnh dung lượng 4 MB. Chứa được tối đa bao nhiêu ảnh?", a: "128 GB = 128 × 1024 MB = 131,072 MB.<br>Số ảnh = 131,072 ÷ 4 = <b>32,768 bức ảnh</b>." },
+      { q: "2. Game Black Myth: Wukong nặng 130 GB. SSD 512 GB còn trống 300 GB. Cài được tối đa mấy game cỡ này?", a: "300 GB ÷ 130 GB = 2.307.<br>Cài được tối đa <b>2 game</b>." },
+      { q: "3. Máy 8 GB RAM, mở 30 tab Chrome 🌐, CPU báo 95%. Đánh giá & xử lý?", a: "<b>Đánh giá:</b> CPU & RAM quá tải trầm trọng.<br><b>Xử lý:</b> Đóng bớt tab Chrome, mở Task Manager End Task app ngốn RAM, cân nhắc nâng RAM lên 16 GB." },
+      { q: "4. Win bật HDD mất 50s, SSD mất 10s. Mỗi ngày bật máy 3 lần trong 365 ngày. Nâng SSD tiết kiệm bao nhiêu giờ/năm?", a: "Mỗi lần tiết kiệm: 50s - 10s = 40s.<br>Mỗi năm: 40s × 3 × 365 = 43,800 giây = <b>12.16 Giờ</b>!" },
+      { q: "5. Tư vấn cấu hình cho: (A) Sinh viên học cơ bản, (B) Dev Web, (C) Video Editor 4K?", a: "<b>(A) Cơ bản:</b> 8GB RAM + 256GB SSD.<br><b>(B) Dev Web:</b> 16GB RAM + 512GB SSD (chạy Docker/IDE).<br><b>(C) Video 4K:</b> 32GB+ RAM + 1TB SSD NVMe + GPU rời." }
+    ];
+
+    const stage4aData = [
+      { q: "Thích tìm thuật toán mới, ngồi cả ngày giải toán cao cấp & lý thuyết?", a: "CS (Computer Science - Khoa học máy tính)" },
+      { q: "Muốn xây dựng ứng dụng ngân hàng cho hàng triệu người dùng mượt mà?", a: "SE (Software Engineering - Kỹ thuật phần mềm)" },
+      { q: "Quản lý hệ thống server, mạng internet và bảo mật hạ tầng công ty?", a: "IT (Information Technology - Công nghệ thông tin)" },
+      { q: "Phân tích dữ liệu hành vi mua sắm để dự báo doanh thu siêu thị?", a: "DS (Data Science - Khoa học dữ liệu)" }
+    ];
+
+    const stage4bData = [
+      { q: "'Người dùng bấm xem 5 bộ phim hành động liên tiếp trên web.'", a: "DATA (Dữ liệu thô)" },
+      { q: "'Khách hàng này rất thích phim hành động.'", a: "INFORMATION (Thông tin)" },
+      { q: "'Người thích phim hành động buổi tối thường sẽ xem thêm phim tội phạm vào cuối tuần.'", a: "KNOWLEDGE (Tri thức)" },
+      { q: "'Có nên đẩy quảng cáo liên tục 10 phim/ngày không, xét theo trải nghiệm người dùng & đạo đức?'", a: "WISDOM (Khôn ngoan / Trí tuệ)" }
+    ];
+
+    function initContentInjections() {
+      renderStage1Grid();
+
+      // Stage 2 Injection
+      const evGrid = document.getElementById('evidenceGrid');
+      if (evGrid) {
+        evGrid.innerHTML = '';
+        evidenceData.forEach((d, i) => {
+          const card = document.createElement('div');
+          card.className = 'evidence-card';
+          card.innerHTML = `
+        <span class="tag-error">Bằng chứng #${i + 1}</span>
+        <h4>${d.title}</h4>
+        <p style="color:var(--red); font-size:0.88rem; font-weight:600;">⚠️ Tội: ${d.err}</p>
+        <div class="solution-box">✅ Sửa: ${d.sol}</div>
+        <button class="btn-icon btn-gold" style="margin-top:10px; width:100%; font-size:0.8rem;" onclick="this.parentElement.classList.toggle('revealed'); sfx.playCorrect();">
+          🔍 Hiện Cách Sửa & Phá Án
+        </button>
+      `;
+          evGrid.appendChild(card);
+        });
+      }
+
+      // Stage 3 Injection
+      const s3 = document.getElementById('stage3-questions');
+      if (s3) {
+        s3.innerHTML = '';
+        stage3Data.forEach((d, i) => {
+          const card = document.createElement('div');
+          card.className = 'quiz-card';
+          card.innerHTML = `
+        <div class="quiz-header" onclick="this.parentElement.classList.toggle('open'); sfx.playBeep();">
+          <div class="quiz-q">
+            <span class="quiz-num" style="background:var(--purple); color:#fff;">Đề ${i + 1}</span>
+            <span>${d.q}</span>
+          </div>
+          <span style="color:var(--gold); font-weight:700;">▼ Giải Chi Tiết</span>
+        </div>
+        <div class="quiz-answer">${d.a}</div>
+      `;
+          s3.appendChild(card);
+        });
+      }
+
+      // Stage 4a & 4b Injection
+      const s4a = document.getElementById('stage4a-questions');
+      if (s4a) {
+        s4a.innerHTML = '';
+        stage4aData.forEach((d, i) => {
+          const card = document.createElement('div');
+          card.className = 'quiz-card';
+          card.innerHTML = `
+        <div class="quiz-header" onclick="this.parentElement.classList.toggle('open'); sfx.playBeep();">
+          <div class="quiz-q"><span class="quiz-num">4a.${i + 1}</span> <span>${d.q}</span></div>
+          <span style="color:var(--cyan);">▼ Ngành nào?</span>
+        </div>
+        <div class="quiz-answer">👉 Ngành: <b>${d.a}</b></div>
+      `;
+          s4a.appendChild(card);
+        });
+      }
+
+      const s4b = document.getElementById('stage4b-questions');
+      if (s4b) {
+        s4b.innerHTML = '';
+        stage4bData.forEach((d, i) => {
+          const card = document.createElement('div');
+          card.className = 'quiz-card';
+          card.innerHTML = `
+        <div class="quiz-header" onclick="this.parentElement.classList.toggle('open'); sfx.playBeep();">
+          <div class="quiz-q"><span class="quiz-num">4b.${i + 1}</span> <span>${d.q}</span></div>
+          <span style="color:var(--cyan);">▼ Tầng nào?</span>
+        </div>
+        <div class="quiz-answer">👉 Tầng: <b>${d.a}</b></div>
+      `;
+          s4b.appendChild(card);
+        });
+      }
+    }
+
+    /* -------------------------------------------------------------
+     * 7. WHEEL OF FORTUNE SPINNER (Canvas)
+     * ------------------------------------------------------------- */
+    let currentWheelAngle = 0;
+    let isSpinning = false;
+
+    function drawWheel() {
+      const canvas = document.getElementById('wheelCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const width = canvas.width;
+      const height = canvas.height;
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const radius = width / 2 - 10;
+
+      ctx.clearRect(0, 0, width, height);
+      if (teams.length === 0) return;
+
+      const sliceAngle = (2 * Math.PI) / teams.length;
+      const colors = ['#00F0FF', '#9D4EDD', '#FF2E93', '#FFD166', '#06D6A0', '#EF476F', '#3A86FF', '#FB5607'];
+
+      teams.forEach((team, i) => {
+        const angle = currentWheelAngle + i * sliceAngle;
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, angle, angle + sliceAngle);
+        ctx.closePath();
+        ctx.fillStyle = colors[i % colors.length];
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(9, 13, 22, 0.8)';
+        ctx.lineWidth = 4;
+        ctx.stroke();
+
+        ctx.save();
+        ctx.translate(centerX, centerY);
+        ctx.rotate(angle + sliceAngle / 2);
+        ctx.textAlign = "right";
+        ctx.fillStyle = "#000";
+        ctx.font = "bold 15px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText(team.name, radius - 18, 5);
+        ctx.restore();
+      });
+
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, 35, 0, 2 * Math.PI);
+      ctx.fillStyle = "#131A2A";
+      ctx.fill();
+      ctx.strokeStyle = "#00F0FF";
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      ctx.fillStyle = "#00F0FF";
+      ctx.font = "bold 14px 'Bricolage Grotesque'";
+      ctx.textAlign = "center";
+      ctx.fillText("IT 101", centerX, centerY + 5);
+    }
+
+    function spinWheel() {
+      if (isSpinning || teams.length === 0) return;
+      isSpinning = true;
+      sfx.playDrumroll();
+
+      const extraSpins = 5 + Math.random() * 5;
+      const targetAngle = currentWheelAngle + extraSpins * 2 * Math.PI;
+      const duration = 4000;
+      const start = performance.now();
+
+      function animate(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+
+        currentWheelAngle = (targetAngle * easeOut) % (2 * Math.PI);
+        drawWheel();
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          isSpinning = false;
+          const sliceAngle = (2 * Math.PI) / teams.length;
+          let normalizedAngle = (3 * Math.PI / 2 - currentWheelAngle) % (2 * Math.PI);
+          if (normalizedAngle < 0) normalizedAngle += 2 * Math.PI;
+
+          const winnerIndex = Math.floor(normalizedAngle / sliceAngle) % teams.length;
+          const winner = teams[winnerIndex];
+
+          sfx.playFanfare();
+          alert(`🎉 VÒNG QUAY ĐÃ CHỌN TRÚNG:\n\n👉 ${winner.name.toUpperCase()} 👈`);
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+
+    /* -------------------------------------------------------------
+     * 8. WINNER CEREMONY & CONFETTI
+     * ------------------------------------------------------------- */
+    function openWinnerModal() {
+      const sorted = [...teams].sort((a, b) => b.score - a.score);
+      const container = document.getElementById('winnnerDetails');
+
+      if (sorted.length === 0) {
+        container.innerHTML = `<p>Chưa có đội thi nào!</p>`;
+      } else {
+        container.innerHTML = `
+      <div style="display:flex; flex-direction:column; gap:12px; text-align:left;">
+        <div style="background:rgba(255,209,102,0.15); border:2px solid var(--gold); padding:16px; border-radius:14px;">
+          <div style="color:var(--gold); font-weight:800; font-size:1.1rem;">🥇 QUÁN QUÂN - CHÚA TỂ KERNEL 👑</div>
+          <div style="font-size:1.5rem; font-weight:800; color:#fff;">${sorted[0]?.name || ''}</div>
+          <div style="font-family:var(--font-code); color:var(--gold); font-weight:700;">${sorted[0]?.score || 0} ĐIỂM</div>
+        </div>
+        
+        ${sorted[1] ? `
+        <div style="background:rgba(226,232,240,0.1); border:1px solid #E2E8F0; padding:12px; border-radius:12px;">
+          <div style="color:#E2E8F0; font-weight:700;">🥈 Á QUÂN 1 - THÁNH RELATIVE PATH 🛣️</div>
+          <div style="font-size:1.2rem; font-weight:700;">${sorted[1].name} (${sorted[1].score}đ)</div>
+        </div>` : ''}
+
+        ${sorted[2] ? `
+        <div style="background:rgba(233,213,195,0.1); border:1px solid #E9D5C3; padding:12px; border-radius:12px;">
+          <div style="color:#E9D5C3; font-weight:700;">🥉 Á QUÂN 2 - PHÁP SƯ TASK MANAGER 🧙‍♂️</div>
+          <div style="font-size:1.1rem; font-weight:700;">${sorted[2].name} (${sorted[2].score}đ)</div>
+        </div>` : ''}
+      </div>
+    `;
+      }
+
+      document.getElementById('winnerModal').classList.add('active');
+      sfx.playFanfare();
+      triggerConfetti();
+    }
+
+    function closeWinnerModal() {
+      document.getElementById('winnerModal').classList.remove('active');
+    }
+
+    function triggerConfetti() {
+      const canvas = document.getElementById('confettiCanvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const particles = [];
+      const colors = ['#00F0FF', '#9D4EDD', '#FF2E93', '#FFD166', '#06D6A0'];
+
+      for (let i = 0; i < 150; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          size: Math.random() * 8 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vy: Math.random() * 4 + 2,
+          vx: Math.random() * 2 - 1
+        });
+      }
+
+      function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let alive = false;
+        particles.forEach(p => {
+          p.y += p.vy;
+          p.x += p.vx;
+          if (p.y < canvas.height) alive = true;
+          ctx.fillStyle = p.color;
+          ctx.fillRect(p.x, p.y, p.size, p.size);
+        });
+
+        if (alive) requestAnimationFrame(render);
+        else ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+      render();
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => { });
+      } else {
+        document.exitFullscreen().catch(err => { });
+      }
+    }
+
+    /* -------------------------------------------------------------
+     * 9. INITIALIZATION
+     * ------------------------------------------------------------- */
+    window.addEventListener('DOMContentLoaded', () => {
+      loadTeamsState();
+      renderTeams();
+      initContentInjections();
+    });
+  </script>
+</body>
+
+</html>
